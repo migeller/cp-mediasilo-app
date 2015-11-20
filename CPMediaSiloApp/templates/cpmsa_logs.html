@@ -1,0 +1,27 @@
+{% themeextends "admin/base_admin.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'CP MediaSilo App' %}: {%trans 'Logs'%}{% endblock %}
+{% block heading %}{% trans 'CP MediaSilo App' %}: {% trans 'Logs' %}</a> {% endblock heading %}
+
+{% block content %}
+
+<h3>This log view updates itself every 5 seconds.</h3>
+
+<div id="log_content_display" style="height:600px;border:1px solid #ccc;overflow:auto;">
+{% for line in log_content %}
+{{ line }}<br>
+{% endfor %}
+</div>
+
+<script type="text/javascript">
+    setInterval ( "read_logs()", 5000 );
+
+    function read_logs() {
+        jQuery.get('{% url read_cpmsa_logs %}', {}, function(data) {
+            $("#log_content_display").html(data);
+        });
+    }
+</script>
+
+{% endblock content %}

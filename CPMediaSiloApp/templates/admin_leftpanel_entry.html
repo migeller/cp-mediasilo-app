@@ -1,0 +1,18 @@
+{% load i18n messages %}
+{% url cp_mediasilo_app_config as cp_mediasilo_app_config %}
+{% url cp_mediasilo_app_models as cp_mediasilo_app_models %}
+
+<ol>
+	<li>
+		<a href="{{ cp_mediasilo_app_config }}"
+		{% ifequal request.path cp_mediasilo_app_config %}
+			class="selected"
+		{% endifequal %}><img src="{{ STATIC_URL }}img/cpmsa.png" /> {% trans 'CP MediaSilo App' %}</a>
+	</li>
+		<li>
+		<a href="{% url cpmsa_logs %}" style="margin-left:25px"
+			{% ifequal request.path cpmsa_logs %}
+				class="selected"
+			{% endifequal %}><img src="{{ STATIC_URL }}img/cpmsa.png" /> {% trans 'Logs' %}</a>
+	</li>
+</ol>

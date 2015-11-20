@@ -1,0 +1,10 @@
+{% load i18n cache navbar %}
+{% url cp_mediasilo_app_config as cp_mediasilo_app_config %}
+
+{% comment %} Make sure the user has correct role for this operation {% endcomment %}
+{% if user|has_role:"_library_write" %}
+    <li>
+            <a href="{% url cp_mediasilo_app_config %}" {% current_nav cp_mediasilo_app_config %} title="CP MediaSilo App">{% trans "CP MediaSilo App" %}</a>
+
+    </li>
+{% endif %}

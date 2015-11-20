@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# /etc/init.d/cpmsa
+# Subsystem file for the CP MediaSilo App daemon
+# chkconfig: 2345 99 01
+# description: CPMSA server daemon
+# processname: cpmsa
+# pidfile: /var/run/cpmsa.pid
+# Source function library.      This creates the operating environment for the process to be started
+. /etc/rc.d/init.d/functions
+
+case "$1" in
+
+	'start')
+		if ! [[ -e "/var/lock/subsys/cpmsa" ]]; then
+			echo "Starting cpmsa daemon."
+			/usr/local/cpmsa/main.py &
+			touch /var/lock/subsys/cpmsa
+		else
+			echo "cpmsa daemon is already running."
+		fi
+		;;
+
+	'stop')
+		echo "Shutting down cpmsa daemon."
+		pid="$(cat /var/run/cpmsa.pid)"
+		kill -s INT "${pid}"
+                rm -f /var/lock/subsys/cpmsa
+		;;
+
+	*)
+		echo "Usage: $0 {start|stop}"
+		exit 1
+
+esac
