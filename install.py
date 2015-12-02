@@ -163,6 +163,12 @@ try:
 except:
     pass
 
+try:
+    shutil.rmtree(conf.cpmsa_target, ignore_errors=True)
+    log.info("Successfully removed %s." % conf.cpmsa_target)
+except:
+    pass
+
 # Copy files around
 try:
     shutil.copytree(conf.CPMediaSiloApp_source,
@@ -173,24 +179,14 @@ except:
     log.info("Can't copy %s to its final destination." %
              conf.CPMediaSiloApp_source)
 
-# create cpmsa folder if it doesn't exist, yet
-if not os.path.isdir(conf.cpmsa_target):
-    try:
-        os.makedirs(conf.cpmsa_target)
-        log.info("Successfully created %s." % conf.cpmsa_target)
-    except OSError:
-        log.info("%s seems to exist." % conf.cpmsa_target)
-else:
-    log.info("%s exists." % conf.cpmsa_target)
-
-# list and copy cpmsa source files
-for file in os.listdir(conf.cpmsa_source):
-    try:
-        shutil.copy(os.path.join(conf.cpmsa_source, file),
-                    os.path.join(conf.cpmsa_target, file))
-        log.info("Successfully copied %s into %s." % (file, conf.cpmsa_target))
-    except:
-        log.info("Can't copy %s to its final destination." % file)
+# copy cpmsa source files
+try:
+    shutil.copytree(conf.cpmsa_source,
+                    conf.cpmsa_target, symlinks=False, ignore=None)
+    log.info("Successfully copied %s into %s." % (conf.cpmsa_source,
+                                                  conf.cpmsa_target))
+except:
+    log.info("Can't copy %s to its final destination." % conf.cpmsa_source)
 
 try:
     shutil.copyfile(conf.etc_init_d_source, conf.etc_init_d_target)

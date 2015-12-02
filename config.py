@@ -70,16 +70,16 @@ class Config:
             print "Script's parent dir is %s." % install_dir
         self.log_file = os.path.join(install_dir, "install.log")
 
-        self.CPMediaSiloApp_source = os.path.join(
-            install_dir, "CPMediaSiloApp")
-        self.CPMediaSiloApp_target = os.path.join(
-            "/opt/cantemo/portal/portal/plugins/", "CPMediaSiloApp")
-        self.CPMediaSiloApp_config_file = os.path.join(
-            "/opt/cantemo/portal/portal/plugins/", "CPMediaSiloApp", "config.json")
+        self.CPMediaSiloApp_source = os.path.join(install_dir,
+                                                  "CPMediaSiloApp")
+        self.CPMediaSiloApp_target = os.path.join("/opt/cantemo/portal/portal/plugins/",
+                                                  "CPMediaSiloApp")
+        self.CPMediaSiloApp_config_file = os.path.join("/opt/cantemo/portal/portal/plugins/",
+                                                       "CPMediaSiloApp",
+                                                       "config.json")
         self.cpmsa_source = os.path.join(install_dir, "cpmsa")
         self.cpmsa_target = os.path.join("/usr/local", "cpmsa")
-        self.etc_init_d_source = os.path.join(
-            install_dir, "etc_init_d", "cpmsa")
+        self.etc_init_d_source = os.path.join(install_dir, "etc_init_d", "cpmsa")
         self.etc_init_d_target = os.path.join("/etc/init.d", "cpmsa")
         self.sn_source = os.path.join(install_dir, "sn.txt")
         self.sn_target = os.path.join("/usr/local", "cpmsa", "sn.txt")
